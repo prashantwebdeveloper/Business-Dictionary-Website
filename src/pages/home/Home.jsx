@@ -23,6 +23,9 @@ import { GetCategoryFirebase } from '../../firebase/services/category/CategorySe
 import { GetProductsFirebase } from '../../firebase/services/product/ProductServices';
 import { convertDateFormat } from '../../utils/dateUtils';
 
+import GLightbox from 'glightbox';
+import 'glightbox/dist/css/glightbox.min.css';
+
 const Home = () => {
 
     const [isLoading, setIsLoading] = useState(false);

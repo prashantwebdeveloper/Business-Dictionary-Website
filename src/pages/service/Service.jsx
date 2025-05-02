@@ -10,6 +10,9 @@ import Pricing from '../../components/pages/pricing/Pricing';
 import Subscription from '../../components/pages/subscription/Subscription';
 import Testimonial from '../../components/pages/testimonial/Testimonial';
 
+import GLightbox from 'glightbox';
+import 'glightbox/dist/css/glightbox.min.css';
+
 const Service = () => {
 
 
