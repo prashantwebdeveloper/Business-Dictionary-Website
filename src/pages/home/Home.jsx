@@ -26,6 +26,10 @@ import { convertDateFormat } from '../../utils/dateUtils';
 import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.min.css';
 
+import { tns } from 'tiny-slider/src/tiny-slider';
+import 'tiny-slider/dist/tiny-slider.css';
+
+
 const Home = () => {
 
     const [isLoading, setIsLoading] = useState(false);
