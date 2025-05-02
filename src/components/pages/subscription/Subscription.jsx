@@ -4,7 +4,7 @@ import Loader from '../../loader/Loader';
 
 
 import { PostSubscriptionEmailJs } from '../../../EmailJs/services/SubscriptionServices';
-import { PostSubscriptionFirebase } from '../../../firebase/services/Subscription/SubscriptionServices';
+import { PostSubscriptionFirebase } from '../../../firebase/services/subscription/SubscriptionServices';
 import { toast } from 'react-toastify';
 
 
