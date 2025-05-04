@@ -46,7 +46,7 @@ const Header = () => {
         }
     }, []);
 
-    
+
     const handlePostAd = () => {
         if (currentUser) {
             navigate('/post-ad');
@@ -55,7 +55,7 @@ const Header = () => {
             navigate('/login');
         }
     };
-    
+
 
     const [isLoading, setIsLoading] = useState(false);
     const [logoutModalShow, setLogoutModalShow] = useState(false);
@@ -148,7 +148,7 @@ const Header = () => {
                                                     <li><NavLink to="/product-details">Product Details</NavLink></li> 
                                                     <li><NavLink to="/login">Login</NavLink></li>
                                                     <li><NavLink to="/register">Sign Up</NavLink></li> */}
-                                                    <li><NavLink to="/404">404 Page</NavLink></li>
+                                                    {/* <li><NavLink to="/404">404 Page</NavLink></li> */}
                                                 </ul>
                                             </li>
                                             <li className="nav-item">
@@ -180,10 +180,24 @@ const Header = () => {
                                         <li>
                                             {
                                                 currentUser ? (
-                                                    <NavLink to="/dashboard" className="main-btn account-btn">
-                                                        <span className="d-md-none"><i className="lni lni-user" /></span>
-                                                        <span className="d-none d-md-block">My Account</span>
-                                                    </NavLink>
+                                                    <>
+                                                        <NavLink to="/dashboard" className="main-btn account-btn">
+                                                            <span className="d-md-none"><i className="lni lni-user" /></span>
+                                                            <span className="d-none d-md-block">My Account</span>
+                                                        </NavLink>
+
+                                                        <ul className="dropdown-nav">
+                                                            <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                                                            <li><NavLink to="/profile">Profile</NavLink></li>
+                                                            <li><NavLink to="/post-ad">Post Ad</NavLink></li>
+                                                            <li><NavLink to="/my-ads">My Ads</NavLink></li>
+                                                            <li><NavLink to="/offers">Offers/Messages</NavLink></li>
+                                                           {/*<li><NavLink to="/payments">Payments</NavLink></li>*/}
+                                                            <li><NavLink to="/favorites">Favorites</NavLink></li>
+                                                            {/*<li><NavLink to="/privacy">Privacy</NavLink></li>*/}
+                                                            <li><NavLink onClick={() => setLogoutModalShow(true)}>Sign Out</NavLink></li>
+                                                        </ul>
+                                                    </>
                                                 )
                                                     :
                                                     (
@@ -193,18 +207,6 @@ const Header = () => {
                                                         </NavLink>
                                                     )
                                             }
-
-                                            <ul className="dropdown-nav">
-                                                <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                                                <li><NavLink to="/profile">Profile Settings</NavLink></li>
-                                                <li><NavLink to="/post-ad">Post Ad</NavLink></li>
-                                                <li><NavLink to="/my-ads">My Ads</NavLink></li>
-                                                <li><NavLink to="/offers">Offers/Messages</NavLink></li>
-                                                <li><NavLink to="/payments">Payments</NavLink></li>
-                                                <li><NavLink to="/favorites">Favorites</NavLink></li>
-                                                <li><NavLink to="/privacy">Privacy</NavLink></li>
-                                                <li><NavLink onClick={() => setLogoutModalShow(true)}>Sign Out</NavLink></li>
-                                            </ul>
                                         </li>
                                         <li>
                                             <button type='button' className="main-btn btn-hover d-none d-md-block" onClick={handlePostAd}>Post An Ad</button>

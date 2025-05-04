@@ -90,18 +90,15 @@ const ViewAd = () => {
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="category" className="mb-1">Categories</label>
-                                                        <select
-                                                            name="category"
+                                                        <input
+                                                            type="text"
                                                             id="category"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            name="category"
+                                                            placeholder="Title"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData?.product?.category}
                                                             readOnly
-                                                        >
-                                                            <option value="">Select Category</option>
-                                                            <option value="Mobile">Mobile</option>
-                                                            <option value="Leptop">Leptop</option>
-                                                            <option value="TV">TV</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="price" className="mb-1">Price</label>
@@ -229,48 +226,39 @@ const ViewAd = () => {
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="country" className="mb-1">Country</label>
-                                                        <select
-                                                            name="country"
+                                                        <input
+                                                            type="text"
                                                             id="country"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            name="country"
+                                                            placeholder="Country"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData?.user?.country}
                                                             readOnly
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="state" className="mb-1">State</label>
-                                                        <select
-                                                            name="state"
+                                                        <input
+                                                            type="text"
                                                             id="state"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            name="state"
+                                                            placeholder="State"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData?.user?.state}
                                                             readOnly
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="city" className="mb-1">City</label>
-                                                        <select
-                                                            name="city"
+                                                        <input
+                                                            type="text"
                                                             id="city"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            name="city"
+                                                            placeholder="City"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData?.user?.city}
                                                             readOnly
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     {/* <button type='submit' className="main-btn btn-hover d-flex ms-auto">Update Ad</button> */}
                                                 </div>
@@ -281,8 +269,8 @@ const ViewAd = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
             {/* ====== DASHBOARD PART END ====== */}
 
         </>

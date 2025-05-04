@@ -4,13 +4,19 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 import Loader from '../../components/loader/Loader';
 
-import { SignUpUser, PostUsersFirebase } from '../../firebase/services/auth/register/RegisterServices';
+import { PostUsersImageKit } from '../../imageKit/services/users/UsersServices';
+import { SignUpUser } from '../../firebase/services/auth/register/RegisterServices';
+import { PostUsersFirebase } from '../../firebase/services/users/UsersServices';
 import { toast } from 'react-toastify';
 
 const initialState = {
-    email: "",
     name: "",
+    email: "",
     password: "",
+    phone: "",
+    image: "",
+    imageFileId: "",
+    organizationName: "",
 }
 
 const Register = () => {
@@ -25,11 +31,11 @@ const Register = () => {
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
 
         setFormData((prev) => ({
             ...prev,
-            [name]: value,
+            [name]: files ? files[0] : value,
         }));
     }
 
@@ -40,23 +46,36 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            const resRegister = await SignUpUser(formData);
-            console.log("Res-Register++", resRegister);
+            if (formData.image) {
+                const resImg = await PostUsersImageKit(formData.image);
+                console.log("Res-ImageKit++", resImg);
 
-            if (resRegister?.user?.accessToken) {
-                const userData = {
-                    ...formData,
-                    uid: resRegister.user.uid
-                };
+                if (resImg?.$ResponseMetadata?.statusCode === 200) {
+                    const userFormData = {
+                        ...formData,
+                        image: resImg?.url,
+                        imageFileId: resImg?.fileId,
+                    };
 
-                const res = await PostUsersFirebase(userData);
-                console.log("Res-Users++", res);
+                    const resRegister = await SignUpUser(userFormData);
+                    console.log("Res-Register++", resRegister);
 
-                if (res?.success) {
-                    toast.success(`${formData.name} Register successfully`);
-                    setFormData(initialState);
+                    if (resRegister?.user?.accessToken) {
+                        const userData = {
+                            ...userFormData,
+                            uid: resRegister.user.uid
+                        };
+
+                        const res = await PostUsersFirebase(userData);
+                        console.log("Res-Users++", res);
+
+                        if (res?.success) {
+                            toast.success(`${formData.name} Register successfully`);
+                            setFormData(initialState);
+                        }
+
+                    }
                 }
-
             }
 
         } catch (err) {
@@ -117,21 +136,6 @@ const Register = () => {
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="single-form mb-20">
-                                                <label htmlFor="email" className="mb-2">Email</label>
-                                                <input
-                                                    type="text"
-                                                    id="email"
-                                                    name="email"
-                                                    placeholder="Email"
-                                                    className="py-2 px-3 mb-0 rounded border"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="single-form mb-20">
                                                 <label htmlFor="name" className="mb-2">Name</label>
                                                 <input
                                                     type="text"
@@ -140,6 +144,21 @@ const Register = () => {
                                                     placeholder="Name"
                                                     className="py-2 px-3 mb-0 rounded border"
                                                     value={formData.name}
+                                                    onChange={handleChange}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="single-form mb-20">
+                                                <label htmlFor="email" className="mb-2">Email</label>
+                                                <input
+                                                    type="text"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="Email"
+                                                    className="py-2 px-3 mb-0 rounded border"
+                                                    value={formData.email}
                                                     onChange={handleChange}
                                                     required
                                                 />
@@ -174,9 +193,69 @@ const Register = () => {
                                                             zIndex: "999"
                                                         }}
                                                     >
-                                                        {showpassword ? <FaRegEye size={22} /> : <FaRegEyeSlash size={20} />}
+                                                        {showpassword ? <FaRegEyeSlash size={22} /> : <FaRegEye size={20} />}
                                                     </span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="single-form mb-20">
+                                                <label htmlFor="phone" className="mb-2">Phone</label>
+                                                <input
+                                                    type="text"
+                                                    pattern='\d*'
+                                                    maxLength={16}
+                                                    id="phone"
+                                                    name="phone"
+                                                    placeholder="Phone"
+                                                    className="py-2 px-3 mb-0 rounded border"
+                                                    value={formData.phone}
+                                                    onChange={handleChange}
+                                                    onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="single-form mb-20">
+                                                <label htmlFor="image" className="mb-2">Image</label>
+                                                <input
+                                                    type="file"
+                                                    id="image"
+                                                    name="image"
+                                                    placeholder="Name"
+                                                    className="py-2 px-3 mb-0 rounded border"
+                                                    onChange={handleChange}
+                                                    required
+                                                    accept='image/*'
+                                                />
+                                                {formData.image && (
+                                                    <div className="mb-3 mt-3">
+                                                        <img
+                                                            src={URL.createObjectURL(formData.image)}
+                                                            alt="Image"
+                                                            className="img-thumbnail img-fluid"
+                                                            style={{
+                                                                maxWidth: "125px", maxHeight: "125px", marginBottom: "5px"
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="single-form mb-20">
+                                                <label htmlFor="organizationName" className="mb-2">Organization Name</label>
+                                                <input
+                                                    type="text"
+                                                    id="organizationName"
+                                                    name="organizationName"
+                                                    placeholder="Organization Name"
+                                                    className="py-2 px-3 mb-0 rounded border"
+                                                    value={formData.organizationName}
+                                                    onChange={handleChange}
+                                                    required
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">

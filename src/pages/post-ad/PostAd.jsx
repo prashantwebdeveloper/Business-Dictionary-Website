@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Country, State, City } from 'country-state-city';
 
 import profileimg from "../../assets/images/dashboard/profile-img.png";
 import Sidebar from '../../components/sidebar/Sidebar';
 import Loader from '../../components/loader/Loader';
 
+import { useAuth } from '../../context/auth/AuthContext';
+
+import { GetCategoryFirebase } from '../../firebase/services/category/CategoryServices';
 import { PostProductImageKit } from '../../imageKit/services/product/ProductServices';
 import { PostProductFirebase } from '../../firebase/services/product/ProductServices';
 import { toast } from 'react-toastify';
@@ -26,15 +31,31 @@ const initialState = {
         phone: "",
         address: "",
         country: "",
+        countryCode: "",
         state: "",
+        stateCode: "",
         city: "",
     }
 }
 
 const PostAd = () => {
 
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
+
+    const [categoryData, setCategoryData] = useState([]);
+
+    const [locationData, setLocationData] = useState({
+        countries: [],
+        states: [],
+        cities: []
+    });
+
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState(initialState);
+
+
+    // console.log("+", locationData, formData);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -56,7 +77,63 @@ const PostAd = () => {
                     [name]: value,
                 }
             }))
+
+
+            if (name === "country") {
+                console.log("conntry", value);
+
+                const states = State.getStatesOfCountry(value);
+                const country = Country.getAllCountries().find(country => country.isoCode === value);
+
+                setLocationData((prev) => ({
+                    ...prev,
+                    states: states,
+                    cities: []
+                }));
+
+                setFormData((prev) => ({
+                    ...prev,
+                    user: {
+                        ...prev.user,
+                        country: country?.name || "",
+                        countryCode: value,
+                        state: "",
+                        stateCode: "",
+                        city: ""
+                    }
+                }));
+            }
+            else if (name === "state") {
+                const cities = City.getCitiesOfState(formData?.user?.countryCode, value);
+                const state = State.getStatesOfCountry(formData.user.countryCode).find(state => state.isoCode === value);
+
+                setLocationData((prev) => ({
+                    ...prev,
+                    cities: cities
+                }));
+
+                setFormData((prev) => ({
+                    ...prev,
+                    user: {
+                        ...prev.user,
+                        state: state?.name || "",
+                        stateCode: value,
+                        city: ""
+                    }
+                }));
+            }
+            else if (name === "city") {
+                setFormData((prev) => ({
+                    ...prev,
+                    user: {
+                        ...prev.user,
+                        city: value
+                    }
+                }));
+            }
         }
+
+
     }
 
     const handleSubmit = async (e) => {
@@ -74,13 +151,16 @@ const PostAd = () => {
                 // fileId = resImg?.fileId;
 
                 if (resImg?.$ResponseMetadata?.statusCode === 200) {
+                    const { countryCode, stateCode, ...filteredUser } = formData.user;
+
                     const productData = {
                         product: {
                             ...formData.product,
                             image: resImg?.url,
                             imageFileId: resImg?.fileId,
                         },
-                        user: formData.user
+                        user: filteredUser,
+                        ownerId: currentUser?.uid,
                     };
 
                     const res = await PostProductFirebase(productData);
@@ -89,6 +169,7 @@ const PostAd = () => {
                     if (res?.id) {
                         toast.success("Product added successfully");
                         setFormData(initialState);
+                        navigate("/my-ads")
                     }
                 }
             }
@@ -98,6 +179,28 @@ const PostAd = () => {
             setIsLoading(false);
         }
     }
+
+
+    const GetCategory = async () => {
+        try {
+            const res = await GetCategoryFirebase();
+            console.log("Res-Category++", res);
+
+            setCategoryData(res?.filter((i) => i.status === "active"));
+        } catch (err) {
+            console.error("Error-Category", err);
+        }
+    }
+
+    useEffect(() => {
+        GetCategory();
+
+        const india = Country.getAllCountries().find(c => c.name === "India");
+        setLocationData((prev) => ({
+            ...prev,
+            countries: [india]
+        }));
+    }, []);
 
     return (
         <>
@@ -166,9 +269,13 @@ const PostAd = () => {
                                                             required
                                                         >
                                                             <option value="">Select Category</option>
-                                                            <option value="Mobile">Mobile</option>
-                                                            <option value="Leptop">Leptop</option>
-                                                            <option value="TV">TV</option>
+                                                            {
+                                                                categoryData?.map((i, index) => {
+                                                                    return (
+                                                                        <option value={i?.category} key={index}>{i?.category}</option>
+                                                                    )
+                                                                })
+                                                            }
                                                         </select>
                                                     </div>
                                                     <div className="single-form mb-15">
@@ -247,17 +354,17 @@ const PostAd = () => {
                                                                     <span className="main-btn btn-hover">Select File</span>
                                                                     <span className="d-block">Maximum upload file size 10Mb</span>
                                                                 </span>
+                                                                {formData.product.image && (
+                                                                    <div className="image-preview mt-3">
+                                                                        <img
+                                                                            src={URL.createObjectURL(formData.product.image)}
+                                                                            alt="Selected file preview"
+                                                                            className="img-thumbnail position-relative"
+                                                                            style={{ maxWidth: '100%', maxHeight: '100%', zIndex: "999" }}
+                                                                        />
+                                                                    </div>
+                                                                )}
                                                             </label>
-                                                            {formData.product.image && (
-                                                                <div className="image-preview mt-3">
-                                                                    <img
-                                                                        src={URL.createObjectURL(formData.product.image)}
-                                                                        alt="Selected file preview"
-                                                                        className="img-thumbnail position-relative"
-                                                                        style={{ maxWidth: '100%', maxHeight: '100%', zIndex: "999" }}
-                                                                    />
-                                                                </div>
-                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,14 +437,20 @@ const PostAd = () => {
                                                             name="country"
                                                             id="country"
                                                             className="px-3 py-2 border rounded w-100"
-                                                            value={formData.user.country}
+                                                            value={formData.user.countryCode}
                                                             onChange={handleChange}
                                                             required
                                                         >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
+                                                            <option value="">Select Country</option>
+                                                            {
+                                                                locationData?.countries?.length > 0 ? (
+                                                                    locationData?.countries?.map((i) => (
+                                                                        <option key={i?.isoCode} value={i?.isoCode}>{i?.name}</option>
+                                                                    ))
+                                                                ) : (
+                                                                    <option disabled>No Country available</option>
+                                                                )
+                                                            }
                                                         </select>
                                                     </div>
                                                     <div className="single-form mb-15">
@@ -346,14 +459,20 @@ const PostAd = () => {
                                                             name="state"
                                                             id="state"
                                                             className="px-3 py-2 border rounded w-100"
-                                                            value={formData.user.state}
+                                                            value={formData.user.stateCode}
                                                             onChange={handleChange}
                                                             required
                                                         >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
+                                                            <option value="">Select State</option>
+                                                            {
+                                                                locationData?.states?.length > 0 ? (
+                                                                    locationData?.states?.map((i) => (
+                                                                        <option key={i?.isoCode} value={i?.isoCode}>{i?.name}</option>
+                                                                    ))
+                                                                ) : (
+                                                                    <option disabled>No State available</option>
+                                                                )
+                                                            }
                                                         </select>
                                                     </div>
                                                     <div className="single-form mb-15">
@@ -366,10 +485,16 @@ const PostAd = () => {
                                                             onChange={handleChange}
                                                             required
                                                         >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
+                                                            <option value="">Select City</option>
+                                                            {
+                                                                locationData?.cities?.length > 0 ? (
+                                                                    locationData?.cities?.map((i) => (
+                                                                        <option key={i?.name} value={i?.name}>{i?.name}</option>
+                                                                    ))
+                                                                ) : (
+                                                                    <option disabled>No City available</option>
+                                                                )
+                                                            }
                                                         </select>
                                                     </div>
                                                     {/* <div className="single-form mb-15">

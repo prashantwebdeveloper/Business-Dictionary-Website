@@ -6,6 +6,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Loader from '../../components/loader/Loader';
 
 import { DeleteProductImageKit, PostProductImageKit } from '../../imageKit/services/product/ProductServices';
+import { GetCategoryFirebase } from '../../firebase/services/category/CategoryServices';
 import { PutProductFirebase } from '../../firebase/services/product/ProductServices';
 import { toast } from 'react-toastify';
 
@@ -37,6 +38,7 @@ const EditAd = () => {
     const navigate = useNavigate();
     console.log(id, state);
 
+    const [categoryData, setCategoryData] = useState([]);
 
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState(initialState);
@@ -105,6 +107,7 @@ const EditAd = () => {
                     imageFileId: fileId,
                 },
                 user: formData.user,
+                ownerId: state.ownerId,
                 createdAt: state.createdAt,
                 updatedAt: state.updatedAt,
             }
@@ -150,6 +153,22 @@ const EditAd = () => {
 
         setImageShow(state?.product?.image);
     }, [state]);
+
+
+    const GetCategory = async () => {
+        try {
+            const res = await GetCategoryFirebase();
+            console.log("Res-Category++", res);
+
+            setCategoryData(res?.filter((i) => i.status === "active"));
+        } catch (err) {
+            console.error("Error-Category", err);
+        }
+    }
+
+    useEffect(() => {
+        GetCategory();
+    }, []);
 
     return (
         <>
@@ -218,9 +237,13 @@ const EditAd = () => {
                                                             required
                                                         >
                                                             <option value="">Select Category</option>
-                                                            <option value="Mobile">Mobile</option>
-                                                            <option value="Leptop">Leptop</option>
-                                                            <option value="TV">TV</option>
+                                                            {
+                                                                categoryData?.map((i, index) => {
+                                                                    return (
+                                                                        <option value={i?.category} key={index}>{i?.category}</option>
+                                                                    )
+                                                                })
+                                                            }
                                                         </select>
                                                     </div>
                                                     <div className="single-form mb-15">
@@ -378,51 +401,41 @@ const EditAd = () => {
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="country" className="mb-1">Country</label>
-                                                        <select
+                                                        <input
+                                                            type="text"
                                                             name="country"
                                                             id="country"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            placeholder="Country"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData.user.country}
-                                                            onChange={handleChange}
-                                                            required
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                            readOnly
+                                                        />
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="state" className="mb-1">State</label>
-                                                        <select
+                                                        <input
+                                                            type="text"
                                                             name="state"
                                                             id="state"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            placeholder="State"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData.user.state}
-                                                            onChange={handleChange}
-                                                            required
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                            // onChange={handleChange}
+                                                            readOnly
+                                                        />
                                                     </div>
                                                     <div className="single-form mb-15">
                                                         <label htmlFor="city" className="mb-1">City</label>
-                                                        <select
+                                                        <input
+                                                            type="text"
                                                             name="city"
                                                             id="city"
-                                                            className="px-3 py-2 border rounded w-100"
+                                                            placeholder="City"
+                                                            className="px-3 py-2 mb-0 border rounded"
                                                             value={formData.user.city}
-                                                            onChange={handleChange}
-                                                            required
-                                                        >
-                                                            <option value="">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                            <option value="none">Select state</option>
-                                                        </select>
+                                                            // onChange={handleChange}
+                                                            readOnly
+                                                        />
                                                     </div>
                                                     {/* <div className="single-form mb-15">
                                                     <div className="form-check check-style">

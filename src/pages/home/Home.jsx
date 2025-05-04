@@ -252,7 +252,7 @@ const Home = () => {
             <section className="category-list-area pt-130">
                 <div className="container">
                     <div className="category-list-wrapper">
-                        <div className="category-list-item">
+                       {/* <div className="category-list-item">
                             <Link to="/product">
                                 <div className="icon">
                                     <i className="lni lni-car" />
@@ -331,7 +331,7 @@ const Home = () => {
                                 </div>
                                 <h3>Pets</h3>
                             </Link>
-                        </div>
+                        </div> */}
 
                         {
                             categoryData?.slice(0, 10)?.map((i, index) => {
@@ -377,7 +377,7 @@ const Home = () => {
                                                 </Link>
                                                 <div className="product-action">
                                                     <Link><i className="lni lni-heart" /></Link>
-                                                    <Link className="share"><i className="lni lni-share" /></Link>
+                                                    {/*<Link className="share"><i className="lni lni-share" /></Link>*/}
                                                 </div>
                                             </div>
                                             <div className="product-content">
@@ -396,7 +396,7 @@ const Home = () => {
                                                         <Link><i className="lni lni-user" /> {i.user.firstName}</Link>
                                                     </li>
                                                     <li>
-                                                        <Link><i className="lni lni-package" /> Used</Link>
+                                                        <Link><i className="lni lni-package" /> {i.product.category}</Link>
                                                     </li>
                                                 </ul>
                                                 <div className="product-bottom">
@@ -596,11 +596,11 @@ const Home = () => {
                                                     {i.product.description}
                                                 </p>
                                                 <div className="product-bottom">
-                                                    <Link className="address-link">
+                                                    <div className="address-link">
                                                         <i className="lni lni-map-marker me-1" />
-                                                        {i.user.country}
-                                                    </Link>
-                                                    <span className="theme-color"><i className="lni lni-heart" /></span>
+                                                        {i.user.state}, {i.user.city}
+                                                    </div>
+                                                    {/*<span className="theme-color"><i className="lni lni-heart" /></span>*/}
                                                 </div>
                                             </div>
                                         </div>

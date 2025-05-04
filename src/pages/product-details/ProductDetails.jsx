@@ -15,6 +15,12 @@ import Loader from '../../components/loader/Loader';
 import { GetProductDetailsFirebase } from '../../firebase/services/product/ProductServices';
 import { convertDateFormat, DetailsconvertDateFormat } from '../../utils/dateUtils';
 
+const initialState = {
+    name: "",
+    email: "",
+    message: "",
+}
+
 const ProductDetails = () => {
 
     const { id } = useParams();
@@ -22,6 +28,26 @@ const ProductDetails = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [productDetail, setProductDetaila] = useState({});
+
+    const [formData, setFormData] = useState(initialState)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+
+    }
+
 
     const GetProductDetails = async (ID) => {
         setIsLoading(true);
@@ -59,7 +85,7 @@ const ProductDetails = () => {
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Product</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Product Details</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -81,10 +107,10 @@ const ProductDetails = () => {
                                             <a className="thumb-img active" id="v-pills-tab-1" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">
                                                 <img src={productDetail?.product?.image} alt="" />
                                             </a>
-                                            <a className="thumb-img" id="v-pills-tab-2" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
+                                            {/* <a className="thumb-img" id="v-pills-tab-2" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
                                                 <img src={productthumb2} alt="" />
                                             </a>
-                                            {/* <a className="thumb-img" id="v-pills-tab-2" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
+                                           <a className="thumb-img" id="v-pills-tab-2" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
                                                 <img src={productthumb2} alt="" />
                                             </a>
                                             <a className="thumb-img" id="v-pills-tab-3" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">
@@ -99,12 +125,12 @@ const ProductDetails = () => {
                                                     <img src={productDetail?.product?.image} alt="" />
                                                 </div>
                                             </div>
-                                            <div className="tab-pane fade show" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-tab-2">
+                                            {/* <div className="tab-pane fade show" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-tab-2">
                                                 <div className="showcase-img">
                                                     <img src={productdetails2} alt="" />
                                                 </div>
                                             </div>
-                                            {/* <div className="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-tab-2">
+                                            <div className="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-tab-2">
                                                 <div className="showcase-img">
                                                     <img src={productdetails2} alt="" />
                                                 </div>
@@ -121,7 +147,7 @@ const ProductDetails = () => {
                             <div className="text-wrapper">
                                 <div className="mb-20 meta-top">
                                     <Link className="mr-3 date"><i className="mr-2 lni lni-calendar" />
-                                    {DetailsconvertDateFormat(productDetail?.createdAt)}
+                                        {DetailsconvertDateFormat(productDetail?.createdAt)}
                                     </Link>
                                     <Link className="address"><i className="mr-2 lni lni-map-marker" />
                                         {productDetail?.user?.country}
@@ -157,7 +183,7 @@ const ProductDetails = () => {
                                             <i className="lni lni-link" /> <span>Categories: </span> <Link>{productDetail?.product?.category}</Link>
                                         </li>
                                         <li>
-                                            <i className="lni lni-apple" /> <span>Brand: </span> <Link>Apple</Link>
+                                            <i className="lni lni-user" /> <span>Business: </span> <Link>{productDetail?.user?.firstName}</Link>
                                         </li>
                                     </ul>
                                 </div>

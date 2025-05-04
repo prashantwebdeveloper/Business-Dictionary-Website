@@ -169,7 +169,7 @@ const Login = () => {
                                                             zIndex: "999"
                                                         }}
                                                     >
-                                                        {showpassword ? <FaRegEye size={22} /> : <FaRegEyeSlash size={20} />}
+                                                        {showpassword ? <FaRegEyeSlash size={22} /> : <FaRegEye size={20} />}
                                                     </span>
                                                 </div>
                                             </div>
@@ -179,11 +179,11 @@ const Login = () => {
                                                 <button type='submit' className="main-btn btn-hover py-2 px-5 rounded" disabled={isLoading}>Sign In</button>
                                             </div>
                                         </div>
-                                        <div className="col-12">
+                                        {/* <div className="col-12">
                                             <div className="single-form mb-20">
                                                 <p>Forget Password? <Link>Reset Now</Link></p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-12">
                                             <div className="single-form mb-30">
                                                 <p>Don't have an Account? <Link to="/register">Sing Up</Link></p>

@@ -1,7 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, firestoreDB } from "../../../FirebaseConfig";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { FormatDate } from "../../../../utils/dateUtils";
+import { auth } from "../../../FirebaseConfig";
 
 
 export const SignUpUser = async (data) => {
@@ -12,6 +10,7 @@ export const SignUpUser = async (data) => {
         if (res?.user?.accessToken) {
             await updateProfile(res.user, {
                 displayName: data.name,
+                photoURL: data.image
             });
 
             return res;
@@ -24,30 +23,19 @@ export const SignUpUser = async (data) => {
 }
 
 
-// Users
-// Collection
-const usersCollection = collection(firestoreDB, "users");
 
-// Doc
-const usersDocId = (id) => {
-    return doc(usersCollection, id);
-}
-
-export const PostUsersFirebase = async (data) => {
+export const ProfileUpdateUser = async (currentUser, data) => {
     try {
-        const payload = {
-            ...data,
-            createdAt: FormatDate(new Date()),
-            updatedAt: null,
-        }
-
-        const res = await setDoc(usersDocId(data.uid), payload);
-        console.log("Post-Users++", res);
+        const res = await updateProfile(currentUser, {
+            displayName: data.name,
+            photoURL: data.image
+        });
+        console.log("updateProfile++", res);
 
         return { success: true };
     } catch (err) {
-        console.error('Error-Post-Users--', err);
+        console.error('Error-updateProfile--', err);
 
-        return { success : false, error: err };
+        return { success: false, error: err };
     }
 }

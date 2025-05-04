@@ -39,45 +39,7 @@ const Favorites = () => {
                         <div className="col-xl-9 col-lg-8">
                             <div className="dashboard-wrapper box-style">
                                 <div className="title">
-                                    <h3>Overview</h3>
-                                    <span className="main-btn">Last 15 Days</span>
-                                </div>
-                                <div className="cards-wrapper">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <div className="box-style single-card">
-                                                <div className="icon">
-                                                    <i className="lni lni-notepad" />
-                                                </div>
-                                                <div className="text">
-                                                    <h5>Total Ad Posted</h5>
-                                                    <p>400 Add Posted</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="box-style single-card">
-                                                <div className="icon">
-                                                    <i className="lni lni-add-files" />
-                                                </div>
-                                                <div className="text">
-                                                    <h5>Feature Ads</h5>
-                                                    <p>90 Add Posted</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="box-style single-card">
-                                                <div className="icon">
-                                                    <i className="lni lni-envelope" />
-                                                </div>
-                                                <div className="text">
-                                                    <h5>Offers / Message</h5>
-                                                    <p>233 Messages</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h3>Favorites</h3>
                                 </div>
                                 <div className="table-wrapper table-responsive">
                                     <table className="table">

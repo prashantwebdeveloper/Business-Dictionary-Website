@@ -67,7 +67,7 @@ const Category = () => {
             <section className="category-list-area pt-60 pb-80">
                 <div className="container">
                     <div className="category-list-wrapper">
-                        <div className="category-list-item">
+                       {/* <div className="category-list-item">
                             <Link to="/product">
                                 <div className="icon">
                                     <i className="lni lni-car" />
@@ -146,7 +146,7 @@ const Category = () => {
                                 </div>
                                 <h3>Pets</h3>
                             </Link>
-                        </div>
+                        </div> */}
 
                         {
                             categoryData?.map((i, index) => {

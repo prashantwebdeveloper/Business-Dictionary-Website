@@ -210,7 +210,7 @@ const Product = () => {
                                                                         </Link>
                                                                         <div className="product-action">
                                                                             <Link ><i className="lni lni-heart" /></Link>
-                                                                            <Link className="share"><i className="lni lni-share" /></Link>
+                                                                            {/*<Link className="share"><i className="lni lni-share" /></Link>*/}
                                                                         </div>
                                                                     </div>
                                                                     <div className="product-content">
@@ -227,12 +227,12 @@ const Product = () => {
                                                                                 <Link ><i className="lni lni-user" /> {i.user.firstName}</Link>
                                                                             </li>
                                                                             <li>
-                                                                                <Link ><i className="lni lni-package" /> Used</Link>
+                                                                                <Link ><i className="lni lni-package" /> {i.product.category}</Link>
                                                                             </li>
                                                                         </ul>
                                                                         <div className="product-bottom">
                                                                             <h3 className="price">${i.product.price}</h3>
-                                                                            <Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>
+                                                                            {/*<Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>

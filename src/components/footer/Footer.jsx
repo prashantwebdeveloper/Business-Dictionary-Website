@@ -31,57 +31,53 @@ const Footer = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-xl-2 col-md-4 order-md-2 order-xl-1 col-sm-6">
+                            <div className="col-xl-3 col-md-6 order-md-2 order-xl-1 col-6">
                                 <div className="footer-widget">
                                     <h4>Quick Link</h4>
                                     <ul className="link">
-                                        <li><NavLink>Home</NavLink></li>
-                                        <li><NavLink>About</NavLink></li>
-                                        <li><NavLink>Category</NavLink></li>
-                                        <li><NavLink>Product details</NavLink></li>
-                                        <li><NavLink>Contact</NavLink></li>
+                                        <li><NavLink to="/">Home</NavLink></li>
+                                        <li><NavLink to="/about">About</NavLink></li>
+                                        <li><NavLink to="/category">Category</NavLink></li>
+                                        <li><NavLink to="/product">Product</NavLink></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-xl-2 col-md-4 order-md-3 order-xl-2 col-sm-6">
+                            <div className="col-xl-3 col-md-6 order-md-3 order-xl-2 col-6">
                                 <div className="footer-widget">
                                     <h4>Support</h4>
                                     <ul className="link">
-                                        <li><NavLink>Live Chat</NavLink></li>
-                                        <li><NavLink>Privacy Policy</NavLink></li>
-                                        <li><NavLink>Purchase</NavLink></li>
-                                        <li><NavLink>Protection</NavLink></li>
-                                        <li><NavLink>Support</NavLink></li>
+                                        <li><NavLink to="/faq">FAQ's</NavLink></li>
+                                        <li><NavLink to="/service">Service</NavLink></li>
+                                        <li><NavLink to="/pricing">Pricing</NavLink></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-xl-2 col-md-4 order-md-4 order-xl-3 col-sm-6">
+                            {/*<div className="col-xl-2 col-md-4 order-md-4 order-xl-3 col-sm-6">
                                 <div className="footer-widget">
                                     <h4>Information</h4>
-                                    <ul className="link">
-                                        <li><NavLink>Company</NavLink></li>
+                                    <ul className="link                                        <li><NavLink>Company</NavLink></li>
                                         <li><NavLink>Contact Info</NavLink></li>
                                         <li><NavLink>Blog &amp; Articles</NavLink></li>
                                         <li><NavLink>Terms of Service</NavLink></li>
                                         <li><NavLink>Privacy Policy</NavLink></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>*/}
                             <div className="col-xl-2 col-md-5 order-md-1 order-xl-4 col-sm-6">
                                 <div className="footer-widget">
                                     <h4>Contact Us</h4>
                                     <ul>
                                         <li>
                                             <span>Phone:</span>
-                                            0345983672937
+                                            +91 90604 85591
                                         </li>
                                         <li>
                                             <span>Email:</span>
-                                            yourmail@gmail.com
+                                            kraj111058@gmail.com
                                         </li>
                                         <li>
                                             <span>Location:</span>
-                                            United State of America
+                                            India
                                         </li>
                                     </ul>
                                 </div>
@@ -94,7 +90,7 @@ const Footer = () => {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="text-center">
-                                    <p>Designed &amp; Developed By <Link to="https://graygrids.com/" rel="nofollow" target="_blank">GrayGrids</Link></p>
+                                    <p>Designed &amp; Developed By <Link to="https://graygrids.com/" rel="nofollow" target="_blank">ListIndia</Link></p>
                                 </div>
                             </div>
                         </div>

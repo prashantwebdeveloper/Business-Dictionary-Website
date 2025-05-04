@@ -7,16 +7,19 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import DeleteAds from '../../components/modal/delete-ads/DeleteAds';
 import Loader from '../../components/loader/Loader';
 
+import { useAuth } from '../../context/auth/AuthContext';
 import { DeleteProductFirebase, GetProductsFirebase } from '../../firebase/services/product/ProductServices';
 import { DeleteProductImageKit } from '../../imageKit/services/product/ProductServices';
 import { toast } from 'react-toastify';
 
-const initialState= {
+const initialState = {
     productId: null,
     imageFileId: null,
 }
 
 const MyAds = () => {
+
+    const { currentUser } = useAuth();
 
     const [selectedProduct, setSelectedProduct] = useState("");
 
@@ -31,13 +34,15 @@ const MyAds = () => {
     }
 
     const GetProducts = async (status) => {
+        setSelectedProduct(status);
+
         setIsLoading(true);
 
         try {
-            const res = await GetProductsFirebase(status);
+            const res = await GetProductsFirebase();
             console.log("Res-Products++", res);
 
-            setProductsData(res);
+            setProductsData(res?.filter((i) => i.ownerId === currentUser?.uid));
 
         } catch (err) {
             console.error("Error-Product", err);
@@ -73,9 +78,14 @@ const MyAds = () => {
     }
 
 
+    // useEffect(() => {
+    //     GetProducts(selectedProduct);
+    // }, [selectedProduct]);
+
+
     useEffect(() => {
-        GetProducts(selectedProduct);
-    }, [selectedProduct]);
+        GetProducts("");
+    }, []);
 
 
     const getStatusClass = (status) => {
@@ -95,6 +105,10 @@ const MyAds = () => {
         }
     };
 
+
+    const filterProduct = selectedProduct
+        ? productsData?.filter((i) => i.product.status === selectedProduct)
+        : productsData;
 
     return (
         <>
@@ -138,7 +152,8 @@ const MyAds = () => {
                                 <div className="cards-wrapper pb-25 mb-15 border-bottom">
                                     <Link
                                         className={`ads-btn ${selectedProduct === "" ? "active" : ""}`}
-                                        onClick={() => setSelectedProduct("")}
+                                    // onClick={() => setSelectedProduct("")}
+                                    onClick={() => GetProducts("")}
                                     >
                                         All Ads ({productsData?.length || 0})
                                     </Link>
@@ -147,13 +162,15 @@ const MyAds = () => {
                                     <Link className="ads-btn">Sold (32)</Link> */}
                                     <Link
                                         className={`ads-btn ${selectedProduct === "active" ? "active" : ""}`}
-                                        onClick={() => setSelectedProduct("active")}
+                                    // onClick={() => setSelectedProduct("active")}
+                                    onClick={() => GetProducts("active")}
                                     >
                                         Active ({productsData?.filter((i) => i.product.status === "active").length || 0})
                                     </Link>
                                     <Link
                                         className={`ads-btn ${selectedProduct === "deactive" ? "active" : ""}`}
-                                        onClick={() => setSelectedProduct("deactive")}
+                                    // onClick={() => setSelectedProduct("deactive")}
+                                    onClick={() => GetProducts("deactive")}
                                     >
                                         Deactive ({productsData?.filter((i) => i.product.status === "deactive").length || 0})
                                     </Link>
@@ -186,63 +203,71 @@ const MyAds = () => {
                                         <tbody>
 
                                             {
-                                                productsData?.map((i, index) => {
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td>
-                                                                <div className="image">
-                                                                    <div className="form-check check-style">
-                                                                        <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault1" />
+                                                filterProduct?.length > 0 ? (
+                                                    filterProduct?.map((i, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div className="image">
+                                                                        {/*<div className="form-check check-style">
+                                                                            <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault1" />
+                                                                        </div> */}
+                                                                        <img src={i.product.image} width={100} alt="" />
                                                                     </div>
-                                                                    <img src={i.product.image} width={100} alt="" />
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h6>{i.product.name}</h6>
-                                                                <span className="ad-id">Ad ID: {i.id}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span className="category">{i.product.category}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span className={`status-btn ${getStatusClass(i.product.status)}`}>
-                                                                    {i.product.status === "active" ? "Active" : "Deactive"}
-                                                                </span>
-                                                            </td>
-                                                            <td>
-                                                                <p>${i.product.price}</p>
-                                                            </td>
-                                                            <td>
-                                                                <div className="action-btns">
-                                                                    <Link
-                                                                        className="eye-btn"
-                                                                        to={`/view-ad/${i.id}`}
-                                                                    >
-                                                                        <i className="lni lni-eye" /></Link>
-                                                                    <Link
-                                                                        className="edit-btn"
-                                                                        to={`/edit-ad/${i.id}`}
-                                                                        state={i}
-                                                                    >
-                                                                        <i className="lni lni-pencil" />
-                                                                    </Link>
-                                                                    <Link
-                                                                        className="delete-btn"
-                                                                        onClick={() => {
-                                                                            setDeleteModalShow(true);
-                                                                            setDeleteProduct({
-                                                                                productId: i?.id,
-                                                                                imageFileId: i?.product?.imageFileId,
-                                                                            })
-                                                                        }}
-                                                                    >
-                                                                        <i className="lni lni-trash" />
-                                                                    </Link>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
+                                                                </td>
+                                                                <td>
+                                                                    <h6>{i.product.name}</h6>
+                                                                    <span className="ad-id">Ad ID: {i.id}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span className="category">{i.product.category}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span className={`status-btn ${getStatusClass(i.product.status)}`}>
+                                                                        {i.product.status === "active" ? "Active" : "Deactive"}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <p>${i.product.price}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <div className="action-btns">
+                                                                        <Link
+                                                                            className="eye-btn"
+                                                                            to={`/view-ad/${i.id}`}
+                                                                        >
+                                                                            <i className="lni lni-eye" /></Link>
+                                                                        <Link
+                                                                            className="edit-btn"
+                                                                            to={`/edit-ad/${i.id}`}
+                                                                            state={i}
+                                                                        >
+                                                                            <i className="lni lni-pencil" />
+                                                                        </Link>
+                                                                        <Link
+                                                                            className="delete-btn"
+                                                                            onClick={() => {
+                                                                                setDeleteModalShow(true);
+                                                                                setDeleteProduct({
+                                                                                    productId: i?.id,
+                                                                                    imageFileId: i?.product?.imageFileId,
+                                                                                })
+                                                                            }}
+                                                                        >
+                                                                            <i className="lni lni-trash" />
+                                                                        </Link>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                ) : (
+                                                    <tr>
+                                                        <td colSpan="6" className="text-center nodata">
+                                                            Data Not Found
+                                                        </td>
+                                                    </tr>
+                                                )
                                             }
 
                                         </tbody>
