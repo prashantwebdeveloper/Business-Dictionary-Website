@@ -11,6 +11,7 @@ import Service from "./pages/service/Service";
 import Category from "./pages/category/Category";
 import Product from "./pages/product/Product";
 import Pricing from "./pages/pricing/Pricing";
+import Payment from "./pages/payment/Payment";
 import Faq from "./pages/faq/Faq";
 import ProductDetails from "./pages/product-details/ProductDetails";
 
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/category" element={<Category />} />
                     <Route path="/product" element={<Product />} />
                     <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/payment" element={<Payment />} />
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/product-details/:id" element={<ProductDetails />} />
 

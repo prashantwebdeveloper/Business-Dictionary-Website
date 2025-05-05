@@ -1,7 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Pricing = () => {
+
+    const navigate = useNavigate();
+
+    const handlePayment = (planName, planPrice) => {
+        navigate("/payment", { state: { planName, planPrice } });
+    }
+
     return (
         <>
 
@@ -11,8 +18,9 @@ const Pricing = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-90">
                                 <h1>Select a Package</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magna.</p>
+                                <p>
+                                    Choose a listing package that fits your needs, from free listings to premium options for greater visibility. Find the perfect plan to help your business grow.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -31,7 +39,7 @@ const Pricing = () => {
                                 </ul>
                                 <h2 className="price"> <sup>$</sup> 20.00</h2>
                                 <span className="time">Monthly</span>
-                                <Link className="main-btn btn-hover">Buy Now</Link>
+                                <button className="main-btn btn-hover" onClick={()=> handlePayment("Basic Pack", 20)}>Buy Now</button>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-8 col-sm-10 col-11">
@@ -48,7 +56,7 @@ const Pricing = () => {
                                 </ul>
                                 <h2 className="price"> <sup>$</sup> 29.00</h2>
                                 <span className="time">Monthly</span>
-                                <Link className="main-btn btn-hover">Buy Now</Link>
+                                <button className="main-btn btn-hover" onClick={()=> handlePayment("Standard Pack", 29)}>Buy Now</button>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-8 col-sm-10 col-11">
@@ -65,7 +73,7 @@ const Pricing = () => {
                                 </ul>
                                 <h2 className="price"> <sup>$</sup> 49.00</h2>
                                 <span className="time">Monthly</span>
-                                <Link className="main-btn btn-hover">Buy Now</Link>
+                                <button className="main-btn btn-hover" onClick={()=> handlePayment("Premium Pack", 49)}>Buy Now</button>
                             </div>
                         </div>
                     </div>

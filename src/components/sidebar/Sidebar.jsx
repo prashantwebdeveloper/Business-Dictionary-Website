@@ -105,10 +105,10 @@ const Sidebar = () => {
                             </li>
                             {/*<li>
                                 <NavLink to="/payments"><i className="lni lni-paypal" />Payments</NavLink>
-                            </li>*/}
+                            </li>
                             <li>
                                 <NavLink to="/favorites"><i className="lni lni-heart" />My Favorites</NavLink>
-                            </li>
+                            </li>*/}
                             {/*<li>
                                 <NavLink to="/privacy"><i className="lni lni-star" />Privacy Settings</NavLink>
                             </li>*/}

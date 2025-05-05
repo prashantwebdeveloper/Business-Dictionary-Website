@@ -175,9 +175,12 @@ const Home = () => {
                     <div className="row">
                         <div className="mx-auto col-lg-7 col-xl-6 col-md-10">
                             <div className="text-center hero-content">
-                                <h1 className="mb-30 wow fadeInUp" data-wow-delay=".2s">Welcome to ClassList</h1>
-                                <p className="wow fadeInUp" data-wow-delay=".4s">Buy and sell everything from used cars to mobile
-                                    phones and computer or search for property, job and more</p>
+                                <h1 className="mb-30 wow fadeInUp" data-wow-delay=".2s">
+                                    Welcome to ListIndia
+                                </h1>
+                                <p className="wow fadeInUp" data-wow-delay=".4s">
+                                    Buy and sell everything from used cars, mobile phones, and computers to property, jobs, and more—all in one place.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -189,29 +192,19 @@ const Home = () => {
             <div className="search-area">
                 <div className="container">
                     <div className="search-wrapper">
-                        <form>
+                        <form onSubmit={() => e.preventDefault()}>
                             <div className="row justify-content-center">
-                                <div className="col-lg-3 col-sm-5 col-10">
+                                <div className="col-lg-4 col-sm-5 col-10">
                                     <div className="search-input">
                                         <label htmlFor="keyword"><i className="lni lni-search-alt theme-color" /></label>
-                                        <input type="text" name="keyword" id="keyword" placeholder="Product keyword" />
+                                        <input type="text" name="keyword" id="keyword" placeholder="Product keyword" required />
                                     </div>
                                 </div>
-                                <div className="col-lg-3 col-sm-5 col-10">
+                                <div className="col-lg-4 col-sm-5 col-10">
                                     <div className="search-input">
                                         <label htmlFor="category"><i className="lni lni-grid-alt theme-color" /></label>
-                                        <select name="category" id="category">
-                                            <option value="none" selected disabled>Categories</option>
-                                            <option value="none">Vehicle</option>
-                                            <option value="none">Electronics</option>
-                                            <option value="none">Mobiles</option>
-                                            <option value="none">Furniture</option>
-                                            <option value="none">Fashion</option>
-                                            <option value="none">Jobs</option>
-                                            <option value="none">Real Estate</option>
-                                            <option value="none">Animals</option>
-                                            <option value="none">Education</option>
-                                            <option value="none">Matrimony</option>
+                                        <select name="category" id="category" required>
+                                            <option value="" selected disabled>Select Categories</option>
                                             {
                                                 categoryData?.map((i) => {
                                                     return (
@@ -222,7 +215,7 @@ const Home = () => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="col-lg-3 col-sm-5 col-10">
+                                {/*<div className="col-lg-3 col-sm-5 col-10">
                                     <div className="search-input">
                                         <label htmlFor="location"><i className="lni lni-map-marker theme-color" /></label>
                                         <select name="location" id="location">
@@ -235,10 +228,10 @@ const Home = () => {
                                             <option value="none">Phoenix</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>*/}
                                 <div className="col-lg-2 col-sm-5 col-10">
                                     <div className="search-btn">
-                                        <button className="main-btn btn-hover">Search <i className="lni lni-search-alt" /></button>
+                                        <button type='submit' className="main-btn btn-hover">Search <i className="lni lni-search-alt" /></button>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +245,7 @@ const Home = () => {
             <section className="category-list-area pt-130">
                 <div className="container">
                     <div className="category-list-wrapper">
-                       {/* <div className="category-list-item">
+                        {/* <div className="category-list-item">
                             <Link to="/product">
                                 <div className="icon">
                                     <i className="lni lni-car" />
@@ -360,8 +353,9 @@ const Home = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>Latest Products</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt dolore magna.</p>
+                                <p>
+                                    Discover the latest items on ClassiList. Fresh listings are added regularly to bring you the best deals.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -376,8 +370,8 @@ const Home = () => {
                                                     <img src={i.product.image} alt="" />
                                                 </Link>
                                                 <div className="product-action">
-                                                    <Link><i className="lni lni-heart" /></Link>
-                                                    {/*<Link className="share"><i className="lni lni-share" /></Link>*/}
+                                                    {/* <Link><i className="lni lni-heart" /></Link>
+                                                    <Link className="share"><i className="lni lni-share" /></Link>*/}
                                                 </div>
                                             </div>
                                             <div className="product-content">
@@ -480,9 +474,9 @@ const Home = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>Why Choose Us</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore
-                                    magna.</p>
+                                <p>
+                                    At ClassiList, we make buying, selling, and discovering products easy. Our platform connects users across India with a wide range of personal and business listings.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -494,8 +488,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>FULLY DOCUMENTED</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Get easy access to detailed information for each listing, ensuring transparency and trust with every transaction.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -506,8 +501,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>CLEAN &amp; MODERN DESIGN</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Navigate our sleek, user-friendly platform designed to make your browsing and buying experience effortless.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -518,8 +514,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>GREAT FEATURES</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Enjoy a range of features like advanced search filters, secure transactions, and tailored listings, all designed to meet your needs.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -530,8 +527,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>COMPLETELY CUSTOMIZABLE</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Create your ideal listing experience with customizable options to showcase your products or services.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -542,8 +540,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>USER FRIENDLY</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Our platform is designed for users of all levels, making buying, selling, and searching quick and easy.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -554,8 +553,9 @@ const Home = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>FULLY RESPONSIVE</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Access ClassiList on any device—whether you're on your phone, tablet, or desktop, it works seamlessly across all platforms.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -571,8 +571,9 @@ const Home = () => {
                         <div className="mx-auto col-lg-6 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>Featured Products</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magna.</p>
+                                <p>
+                                    Explore our handpicked selection of top products. Find the best deals on used cars, electronics, property, and more.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -629,9 +630,9 @@ const Home = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>What Our Users Says</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et
-                                    dolore magna.</p>
+                                <p>
+                                    Hear from our satisfied users about their experiences with ClassiList. Real feedback from real people who have found success through our platform.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -654,8 +655,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "ClassiList has transformed how I connect with clients. The platform is intuitive and seamless—highly recommended!"
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -676,8 +678,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "ClassiList offers great visibility for my listings and helps me reach a targeted audience efficiently."
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -698,8 +701,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "A valuable tool for my business! The platform’s ease of use and broad reach have been essential to my growth."
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -720,8 +724,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "ClassiList is my go-to for finding quality products and services. Fast and easy to use!"
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -742,8 +747,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "Using ClassiList has increased my business visibility and simplified the process of connecting with potential clients."
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -764,8 +770,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <p>Lorem ipsum dolor sit amet,consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                            invidunt ut.</p>
+                                        <p>
+                                            "The platform's smooth process and targeted audience have helped me achieve consistent results."
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -64,8 +64,9 @@ const Subscription = () => {
                             <div className="col-lg-7">
                                 <div className="subscribe-content section-title">
                                     <h1 className="text-white">Subscribe Our Newsletter</h1>
-                                    <p className="text-white">Buy and sell everything from used cars to mobile phones and computer
-                                        or search for property.</p>
+                                    <p className="text-white">
+                                        Stay updated with the latest deals, local listings, and business tips across India. Be the first to know about new opportunities in your area!
+                                    </p>
                                 </div>
                             </div>
                             <div className="col-lg-5">

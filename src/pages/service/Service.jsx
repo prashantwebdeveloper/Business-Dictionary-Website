@@ -56,10 +56,9 @@ const Service = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>What We Offer</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et
-                                    dolore
-                                    magna.</p>
+                                <p>
+                                    At ClassiList, we make buying, selling, and discovering products easy. Our platform connects users across India with a wide range of personal and business listings.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -71,8 +70,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>FULLY DOCUMENTED</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Get easy access to detailed information for each listing, ensuring transparency and trust with every transaction.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +83,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>CLEAN &amp; MODERN DESIGN</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Navigate our sleek, user-friendly platform designed to make your browsing and buying experience effortless.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -95,8 +96,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>GREAT FEATURES</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Enjoy a range of features like advanced search filters, secure transactions, and tailored listings, all designed to meet your needs.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +109,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>COMPLETELY CUSTOMIZABLE</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Create your ideal listing experience with customizable options to showcase your products or services.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -119,8 +122,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>USER FRIENDLY</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Our platform is designed for users of all levels, making buying, selling, and searching quick and easy.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -131,8 +135,9 @@ const Service = () => {
                                 </div>
                                 <div className="service-content">
                                     <h3>AWESOME LAYOUT</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Access ClassiList on any device—whether you're on your phone, tablet, or desktop, it works seamlessly across all platforms.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -148,9 +153,9 @@ const Service = () => {
                         <div className="mx-auto col-xl-6 col-lg-7">
                             <div className="text-center section-title mb-60">
                                 <h1>See How It Works</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore
-                                    magna.</p>
+                                <p>
+                                    At ClassiList, we make it easy to buy, sell, and discover a wide range of products and services. Follow these simple steps to get started:
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -162,8 +167,9 @@ const Service = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Find Interesting Project</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Browse listings for used cars, mobile phones, computers, property, and much more.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -174,8 +180,9 @@ const Service = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Chose What To Do</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Select whether you want to buy, sell, or explore different product categories.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -186,8 +193,9 @@ const Service = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Analysis What Your Want</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Review your options, compare listings, and make informed decisions on what best suits your needs.
+                                    </p>
                                 </div>
                             </div>
                         </div>

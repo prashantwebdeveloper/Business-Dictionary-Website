@@ -129,7 +129,7 @@ const Product = () => {
                     <div className="category-top box-style">
                         <div className="row align-items-center">
                             <div className="col-md-6">
-                                <div className="left-wrapper">
+                                <div className="left-wrapper d-none">
                                     <div className="sorting">
                                         <label htmlFor="sort">Show items</label>
                                         <select name="sort" id="sort">
@@ -209,8 +209,8 @@ const Product = () => {
                                                                             <img src={i.product.image} alt="" />
                                                                         </Link>
                                                                         <div className="product-action">
-                                                                            <Link ><i className="lni lni-heart" /></Link>
-                                                                            {/*<Link className="share"><i className="lni lni-share" /></Link>*/}
+                                                                            {/*<Link ><i className="lni lni-heart" /></Link>
+                                                                            <Link className="share"><i className="lni lni-share" /></Link>*/}
                                                                         </div>
                                                                     </div>
                                                                     <div className="product-content">
@@ -260,8 +260,8 @@ const Product = () => {
                                                                             <img src={i.product.image} alt="" />
                                                                         </Link>
                                                                         <div className="product-action">
-                                                                            <Link ><i className="lni lni-heart" /></Link>
-                                                                            <Link className="share"><i className="lni lni-share" /></Link>
+                                                                            {/*<Link ><i className="lni lni-heart" /></Link>
+                                                                            <Link className="share"><i className="lni lni-share" /></Link>*/}
                                                                         </div>
                                                                     </div>
                                                                     <div className="product-content">
@@ -278,12 +278,13 @@ const Product = () => {
                                                                                 <Link ><i className="lni lni-user" /> {i.user.firstName}</Link>
                                                                             </li>
                                                                             <li>
-                                                                                <Link ><i className="lni lni-package" /> Used</Link>
+                                                                                <Link ><i className="lni lni-package" /> {i.product.category}</Link>
                                                                             </li>
                                                                         </ul>
                                                                         <div className="product-bottom">
-                                                                            <h3 className="price">      </h3>
-                                                                            <Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>
+                                                                            <h3 className="price justify-content-end">${i.product.price}</h3>
+
+                                                                            {/*<Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -21,8 +21,9 @@ const Footer = () => {
                                     <Link to="/" className="d-inline-block mb-30">
                                         <img src={logo} alt="" />
                                     </Link>
-                                    <p className="text-white mb-25">Buy And Sell Everything From Used Cars To Mobile Phones And
-                                        Computers, Search For Property, Jobs And More</p>
+                                    <p className="text-white mb-25">
+                                        Explore a wide range of products—from used cars, mobile phones, and computers to real estate and job opportunities. Everything you need, all in one place.
+                                    </p>
                                     <ul className="social">
                                         <li><NavLink><i className="lni lni-facebook-filled" /></NavLink></li>
                                         <li><NavLink><i className="lni lni-twitter-filled" /></NavLink></li>

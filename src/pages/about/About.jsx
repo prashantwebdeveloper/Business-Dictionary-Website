@@ -59,16 +59,19 @@ const About = () => {
                         </div>
                         <div className="col-lg-6">
                             <div className="welcome-content">
-                                <h1 className="mb-30">Welcome to the ClassiList
-                                    Directory</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magn
-                                    aliquyam erat, sed diam voluptua. At vero eos et accusam dolores rebum. Stet clita kasd
-                                    gubergren, no sea takimata
-                                    sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-                                    elitr, sed diam nonumy eirmod
-                                    tempor.</p>
-                                <Link className="main-btn btn-hover">Read More</Link>
+                                <h1 className="mb-30">Welcome to the ClassiList Directory</h1>
+                                <p>
+                                    ClassiList is India’s premier online marketplace, offering a comprehensive directory for buying, selling, and discovering businesses and services across the country. Whether you're an entrepreneur looking to list your business, a buyer in search of used cars, mobile phones, computers, or real estate, or someone looking for job opportunities, ClassiList connects you to the best options available.
+                                </p>
+
+                                <p>
+                                    Wide Range of Listings: From used cars to mobile phones, computers, real estate, jobs, and business services, we provide a platform that caters to all your buying and selling needs across India.
+                                </p>
+
+                                <p>
+                                    Verified Businesses: We ensure all business listings are carefully vetted, giving you peace of mind while browsing or making purchases.
+                                </p>
+                                <Link to="/faq" className="main-btn btn-hover">Read More</Link>
                             </div>
                         </div>
                     </div>
@@ -84,9 +87,9 @@ const About = () => {
                             <div className="why-chose-content">
                                 <div className="section-title">
                                     <h1>Why Choose Us?</h1>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                        invidunt ut labore et dolore magn
-                                        aliquyam erat, sed diam voluptua.</p>
+                                    <p>
+                                        At ClassiList, we strive to provide the best marketplace experience for businesses and individuals across India. Here’s why we stand out:
+                                    </p>
                                 </div>
                                 <div className="why-chose-item">
                                     <div className="icon">
@@ -94,7 +97,9 @@ const About = () => {
                                     </div>
                                     <div className="content">
                                         <h3>Large Community</h3>
-                                        <p>Buy and sell everything from used cars to mobile phones and computer.</p>
+                                        <p>
+                                            Join a growing network of buyers and sellers across India, offering diverse products and services.
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="why-chose-item">
@@ -103,7 +108,9 @@ const About = () => {
                                     </div>
                                     <div className="content">
                                         <h3>Secure and Safe</h3>
-                                        <p>Buy and sell everything from used cars to mobile phones and computer.</p>
+                                        <p>
+                                            Enjoy safe transactions with verified listings to ensure a trustworthy marketplace.
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="why-chose-item">
@@ -112,7 +119,9 @@ const About = () => {
                                     </div>
                                     <div className="content">
                                         <h3>Free and Premium Options</h3>
-                                        <p>Buy and sell everything from used cars to mobile phones and computer.</p>
+                                        <p>
+                                            Buy and sell everything from used cars to mobile phones and computers with flexible listing options.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +143,10 @@ const About = () => {
                         <div className="mx-auto col-xl-6 col-lg-7">
                             <div className="text-center section-title mb-60">
                                 <h1>See How It Works</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore
-                                    magna.</p>
+                                <p>
+                                    At ClassiList, we make it easy to buy, sell, and discover a wide range of products and services. Follow these simple steps to get started:
+                                </p>
+
                             </div>
                         </div>
                     </div>
@@ -148,8 +158,9 @@ const About = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Sign Up</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Create an account to buy and sell everything from used cars, mobile phones, computers, and more. You can also search for properties.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -160,8 +171,9 @@ const About = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Post Ads</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Easily list your products or services—whether it’s a used car, electronics, or real estate. Reach potential buyers with our user-friendly ad posting feature.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -172,8 +184,9 @@ const About = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Get Sold</h3>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search for
-                                        property.</p>
+                                    <p>
+                                        Connect with buyers quickly and securely. Once your ad is live, start receiving inquiries and make your sale!
+                                    </p>
                                 </div>
                             </div>
                         </div>

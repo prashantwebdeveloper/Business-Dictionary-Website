@@ -15,9 +15,9 @@ const Testimonial = () => {
                         <div className="mx-auto col-xl-6 col-lg-7 col-md-10">
                             <div className="text-center section-title mb-60">
                                 <h1>Trusted By</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor
-                                    invidunt ut labore et
-                                    dolore magna.</p>
+                                <p>
+                                    We’re trusted by companies of all sizes, from local businesses to large corporations, providing the tools and support needed to succeed in the digital marketplace
+                                </p>
                             </div>
                         </div>
                     </div>
