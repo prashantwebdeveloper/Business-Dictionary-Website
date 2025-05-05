@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import aboutimg from "../../assets/images/about/about-img.png";
 import dotshape from "../../assets/images/about/dot-shape.svg";
 import whyus from "../../assets/images/about/why-us.png";
+import owner from "../../assets/images/about/owner.jpg";
 
 import Pricing from '../../components/pages/pricing/Pricing';
 import Subscription from '../../components/pages/subscription/Subscription';
@@ -127,8 +128,13 @@ const About = () => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="text-right why-chose-img">
-                                <img src={whyus} alt="" />
+                            <div className="text-center why-chose-img">
+                                <img src={owner} alt="" style={{ borderRadius: '50%' }} />
+                                <div className='text-center mt-3'>
+                                    <p className='fw-bold' style={{ fontSize: '18px' }}>Founder : Raj Kumar Sharma</p>
+                                    <p className='fw-bold' style={{ fontSize: '18px' }}>Co-Founder : Prashant Moliya</p>
+                                    <p className='fw-bold' style={{ fontSize: '18px' }}>Start Your Business Journey with Us</p>
+                                </div>
                             </div>
                         </div>
                     </div>

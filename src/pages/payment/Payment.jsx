@@ -53,7 +53,7 @@ const Payment = () => {
                         <div className='ms-2'>
                             <h2>{state?.planName || "Basic Pack"}</h2>
 
-                            <h3 className="price mt-4"> <sup>$</sup> {state?.planPrice || 20}.00</h3>
+                            <h3 className="price mt-4" style={{ color: "#FF6B6B", fontSize: '28px' }}> <sup>$</sup> {state?.planPrice || 20}.00</h3>
                             <span className="time">Monthly</span>
 
                         </div>

@@ -2281,6 +2281,10 @@ hero area css
     padding: 20px 30px 25px;
 }
 
+.single-product .no-product-content {
+    padding: 180px 30px;
+}
+
 .single-product .product-content .name {
     margin-bottom: 10px;
 }

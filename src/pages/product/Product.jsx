@@ -129,7 +129,7 @@ const Product = () => {
                     <div className="category-top box-style">
                         <div className="row align-items-center">
                             <div className="col-md-6">
-                                <div className="left-wrapper d-none">
+                                {/*<div className="left-wrapper d-none">
                                     <div className="sorting">
                                         <label htmlFor="sort">Show items</label>
                                         <select name="sort" id="sort">
@@ -138,7 +138,7 @@ const Product = () => {
                                             <option value={2}>Newest Items</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>*/}
                             </div>
                             <div className="col-md-6">
                                 <div className="right-wrapper">
@@ -200,45 +200,55 @@ const Product = () => {
                                         >
                                             <div className="row">
                                                 {
-                                                    productsData?.map((i, index) => {
-                                                        return (
-                                                            <div className="col-lg-6 col-md-6" key={index}>
-                                                                <div className="single-product">
-                                                                    <div className="product-img">
-                                                                        <Link to={`/product-details/${i.id}`}>
-                                                                            <img src={i.product.image} alt="" />
-                                                                        </Link>
-                                                                        <div className="product-action">
-                                                                            {/*<Link ><i className="lni lni-heart" /></Link>
-                                                                            <Link className="share"><i className="lni lni-share" /></Link>*/}
+                                                    productsData?.length > 0 ? (
+                                                        productsData?.map((i, index) => {
+                                                            return (
+                                                                <div className="col-lg-6 col-md-6" key={index}>
+                                                                    <div className="single-product">
+                                                                        <div className="product-img">
+                                                                            <Link to={`/product-details/${i.id}`}>
+                                                                                <img src={i.product.image} alt="" />
+                                                                            </Link>
+                                                                            <div className="product-action">
+                                                                                {/*<Link ><i className="lni lni-heart" /></Link>
+                                                                                <Link className="share"><i className="lni lni-share" /></Link>*/}
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="product-content">
-                                                                        <h3 className="name"><Link to={`/product-details/${i.id}`}>{i.product.name}</Link></h3>
-                                                                        <span className="update">Last Update: {moment(i.updatedAt || i.createdAt, "DD-MM-YYYY, hh:mm:ss A").fromNow()} </span>
-                                                                        <ul className="address">
-                                                                            <li>
-                                                                                <Link ><i className="lni lni-calendar" /> {convertDateFormat(i.createdAt)}</Link>
-                                                                            </li>
-                                                                            <li>
-                                                                                <Link ><i className="lni lni-map-marker" /> {i.user.country}</Link>
-                                                                            </li>
-                                                                            <li>
-                                                                                <Link ><i className="lni lni-user" /> {i.user.firstName}</Link>
-                                                                            </li>
-                                                                            <li>
-                                                                                <Link ><i className="lni lni-package" /> {i.product.category}</Link>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <div className="product-bottom">
-                                                                            <h3 className="price">${i.product.price}</h3>
-                                                                            {/*<Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>*/}
+                                                                        <div className="product-content">
+                                                                            <h3 className="name"><Link to={`/product-details/${i.id}`}>{i.product.name}</Link></h3>
+                                                                            <span className="update">Last Update: {moment(i.updatedAt || i.createdAt, "DD-MM-YYYY, hh:mm:ss A").fromNow()} </span>
+                                                                            <ul className="address">
+                                                                                <li>
+                                                                                    <Link ><i className="lni lni-calendar" /> {convertDateFormat(i.createdAt)}</Link>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <Link ><i className="lni lni-map-marker" /> {i.user.country}</Link>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <Link ><i className="lni lni-user" /> {i.user.firstName}</Link>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <Link ><i className="lni lni-package" /> {i.product.category}</Link>
+                                                                                </li>
+                                                                            </ul>
+                                                                            <div className="product-bottom">
+                                                                                <h3 className="price">${i.product.price}</h3>
+                                                                                {/*<Link className="link-ad"><i className="lni lni-checkmark-circle" /> Verified Ad</Link>*/}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            )
+                                                        })
+                                                    ) : (
+                                                        <div className="col-12">
+                                                            <div className="single-product">
+                                                                <div className="no-product-content">
+                                                                    <h3 className="name text-center">No Product Found</h3>
+                                                                </div>
                                                             </div>
-                                                        )
-                                                    })
+                                                        </div>
+                                                    )
                                                 }
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import profileimg from "../../assets/images/dashboard/profile-img.png";
@@ -8,11 +8,76 @@ import testimonial1 from "../../assets/images/testimonial/testimonial-1.png";
 import testimonial2 from "../../assets/images/testimonial/testimonial-2.png";
 import testimonial3 from "../../assets/images/testimonial/testimonial-3.png";
 import Sidebar from '../../components/sidebar/Sidebar';
+import DeleteAds from '../../components/modal/delete-ads/DeleteAds';
+import Loader from '../../components/loader/Loader';
 
+import { useAuth } from '../../context/auth/AuthContext';
+import { DeleteOffersFirebase, GetOffersFirebase } from '../../firebase/services/offers/OffersServices';
+import DeleteOffers from '../../components/modal/delete-offers/DeleteOffers';
+import { toast } from 'react-toastify';
+
+const initialState = {
+    offersId: null
+}
 
 const Offers = () => {
+
+    const { currentUser } = useAuth();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [offersData, setOffersData] = useState([]);
+
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [deleteOffers, setDeleteOffers] = useState(initialState);
+
+    const handleClose = () => {
+        setDeleteModalShow(false);
+    }
+
+    const GetOffers = async () => {
+        setIsLoading(true);
+
+        try {
+            const res = await GetOffersFirebase();
+            console.log("Res-Offers++", res);
+
+            setOffersData(res?.filter((i) => i.ownerId === currentUser?.uid));
+
+        } catch (err) {
+            console.error("Error-Offers", err);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+
+    const handleDelete = async () => {
+        setIsLoading(true);
+
+        try {
+            const res = await DeleteOffersFirebase(deleteOffers.offersId);
+            console.log("Res-Offers++", res);
+
+            setDeleteOffers(initialState);
+            handleClose();
+
+            toast.success("offers deleted successfully");
+            GetOffers();
+        } catch (err) {
+            console.error("Error-Offers", err);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        GetOffers("");
+    }, []);
+
     return (
         <>
+
+            {isLoading && <Loader isLoading={isLoading} />}
 
             {/* ====== BANNER PART START ====== */}
             <section className="banner-area bg_cover">
@@ -51,19 +116,16 @@ const Offers = () => {
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Photo
-                                                </th>
-                                                <th>
                                                     Title
                                                 </th>
                                                 <th>
-                                                    Category
+                                                    Customer
                                                 </th>
                                                 <th>
-                                                    Ad Status
+                                                    Email
                                                 </th>
                                                 <th>
-                                                    Price
+                                                    Message
                                                 </th>
                                                 <th>
                                                     Action
@@ -71,96 +133,57 @@ const Offers = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div className="image">
-                                                        <div className="form-check check-style">
-                                                            <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault1" />
-                                                        </div>
-                                                        <img src={productthumb1} width={100} alt="" />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h6>8 GB DDR4 Ram, 4th Gen</h6>
-                                                    <span className="ad-id">Ad ID: ng3D5hAMHPajQrM</span>
-                                                </td>
-                                                <td>
-                                                    <span className="category">Ram &amp; Laptop</span>
-                                                </td>
-                                                <td>
-                                                    <span className="status-btn">ACTIVE</span>
-                                                </td>
-                                                <td>
-                                                    <p>$20.99</p>
-                                                </td>
-                                                <td>
-                                                    <div className="action-btns">
-                                                        <Link className="eye-btn"><i className="lni lni-eye" /></Link>
-                                                        <Link className="edit-btn"><i className="lni lni-pencil" /></Link>
-                                                        <Link className="delete-btn"><i className="lni lni-trash" /></Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="image">
-                                                        <div className="form-check check-style">
-                                                            <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault2" />
-                                                        </div>
-                                                        <img src={productthumb1} width={100} alt="" />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h6>8 GB DDR4 Ram, 4th Gen</h6>
-                                                    <span className="ad-id">Ad ID: ng3D5hAMHPajQrM</span>
-                                                </td>
-                                                <td>
-                                                    <span className="category">Ram &amp; Laptop</span>
-                                                </td>
-                                                <td>
-                                                    <span className="status-btn">ACTIVE</span>
-                                                </td>
-                                                <td>
-                                                    <p>$20.99</p>
-                                                </td>
-                                                <td>
-                                                    <div className="action-btns">
-                                                        <Link className="eye-btn"><i className="lni lni-eye" /></Link>
-                                                        <Link className="edit-btn"><i className="lni lni-pencil" /></Link>
-                                                        <Link className="delete-btn"><i className="lni lni-trash" /></Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="image">
-                                                        <div className="form-check check-style">
-                                                            <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault3" />
-                                                        </div>
-                                                        <img src={productthumb1} width={100} alt="" />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h6>8 GB DDR4 Ram, 4th Gen</h6>
-                                                    <span className="ad-id">Ad ID: ng3D5hAMHPajQrM</span>
-                                                </td>
-                                                <td>
-                                                    <span className="category">Ram &amp; Laptop</span>
-                                                </td>
-                                                <td>
-                                                    <span className="status-btn bg-light text-dark">INACTIVE</span>
-                                                </td>
-                                                <td>
-                                                    <p>$20.99</p>
-                                                </td>
-                                                <td>
-                                                    <div className="action-btns">
-                                                        <Link className="eye-btn"><i className="lni lni-eye" /></Link>
-                                                        <Link className="edit-btn"><i className="lni lni-pencil" /></Link>
-                                                        <Link className="delete-btn"><i className="lni lni-trash" /></Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                            {
+                                                offersData?.length > 0 ? (
+                                                    offersData?.map((i, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <h6>{i.product.name}</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="category">{i?.customer?.name}</h6>
+                                                                    <span className="category">{i?.customer?.phone}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <p>{i?.customer?.email}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p>{i.customer?.message}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <div className="action-btns">
+                                                                        {/*<Link
+                                                                            className="eye-btn"
+                                                                            to={`/view-ad/${i.id}`}
+                                                                        >
+                                                                            <i className="lni lni-eye" /></Link>*/}
+                                                                        <Link
+                                                                            className="delete-btn"
+                                                                            onClick={() => {
+                                                                                setDeleteModalShow(true);
+                                                                                setDeleteOffers({
+                                                                                    offersId: i?.id
+                                                                                })
+                                                                            }}
+                                                                        >
+                                                                            <i className="lni lni-trash" />
+                                                                        </Link>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                ) : (
+                                                    <tr>
+                                                        <td colSpan="6" className="text-center nodata">
+                                                            Data Not Found
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            }
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -286,6 +309,9 @@ const Offers = () => {
             </section>
             {/* ====== DASHBOARD PART END ====== */}
 
+
+            { /* ----- Delete-Offers Model ----- */}
+            <DeleteOffers show={deleteModalShow} handleClose={handleClose} handleDelete={handleDelete} />
         </>
     );
 }

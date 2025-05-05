@@ -9,6 +9,7 @@ import Loader from '../../components/loader/Loader';
 import { useAuth } from '../../context/auth/AuthContext';
 import { DeleteProductFirebase, GetProductsFirebase } from '../../firebase/services/product/ProductServices';
 import { DeleteProductImageKit } from '../../imageKit/services/product/ProductServices';
+import { GetOffersFirebase } from '../../firebase/services/offers/OffersServices';
 import { toast } from 'react-toastify';
 
 const initialState = {
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [productsData, setProductsData] = useState([]);
+    const [offersData, setOffersData] = useState([]);
 
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [deleteProduct, setDeleteProduct] = useState(initialState);
@@ -45,7 +47,6 @@ const Dashboard = () => {
             setIsLoading(false);
         }
     }
-
 
     const handleDelete = async () => {
         setIsLoading(true);
@@ -72,9 +73,25 @@ const Dashboard = () => {
         }
     }
 
+    const GetOffers = async () => {
+        setIsLoading(true);
+
+        try {
+            const res = await GetOffersFirebase();
+            console.log("Res-Offers++", res);
+
+            setOffersData(res?.filter((i) => i.ownerId === currentUser?.uid));
+
+        } catch (err) {
+            console.error("Error-Offers", err);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
         GetProducts();
+        GetOffers();
     }, []);
 
 
@@ -153,7 +170,7 @@ const Dashboard = () => {
                                                 </div>
                                                 <div className="text">
                                                     <h5>Offers / Message</h5>
-                                                    <p>0 Messages</p>
+                                                    <p>{offersData?.length || 0} Messages</p>
                                                 </div>
                                             </div>
                                         </div>

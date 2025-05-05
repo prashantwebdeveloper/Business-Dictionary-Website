@@ -15,9 +15,13 @@ import Loader from '../../components/loader/Loader';
 import { GetProductDetailsFirebase } from '../../firebase/services/product/ProductServices';
 import { convertDateFormat, DetailsconvertDateFormat } from '../../utils/dateUtils';
 
+import { PostOffersFirebase } from '../../firebase/services/offers/OffersServices';
+import { toast } from 'react-toastify';
+
 const initialState = {
     name: "",
     email: "",
+    phone: "",
     message: "",
 }
 
@@ -27,13 +31,13 @@ const ProductDetails = () => {
     console.log(id);
 
     const [isLoading, setIsLoading] = useState(false);
-    const [productDetail, setProductDetaila] = useState({});
+    const [productDetail, setProductDetail] = useState({});
 
     const [formData, setFormData] = useState(initialState)
+    console.log(formData);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
 
         setFormData((prev) => ({
             ...prev,
@@ -42,10 +46,35 @@ const ProductDetails = () => {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
 
+        const customerData = {
+            customer: formData,
+            ownerId: productDetail?.ownerId,
+            product: {
+                ...productDetail?.product,
+                id: productDetail?.id
+            },
+            user: productDetail?.user,
+        }
+        console.log(customerData);
+
+        try {
+            const res = await PostOffersFirebase(customerData);
+            console.log("Res-Offers++", res);
+
+            if (res?.id) {
+                toast.success(`${formData?.name} Your Message sent successfully`);
+                setFormData(initialState);
+            }
+        } catch (err) {
+            console.error("Error-Offers", err);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
 
@@ -56,7 +85,7 @@ const ProductDetails = () => {
             const res = await GetProductDetailsFirebase(ID);
             console.log("Res-Product-Details++", res);
 
-            setProductDetaila(res);
+            setProductDetail(res);
 
         } catch (err) {
             console.error("Error-Product-Details", err);
@@ -258,7 +287,7 @@ const ProductDetails = () => {
                                     {/* <h5 className="mb-20">Add a Review</h5>
                                     <p className="mb-30">Your email address will not be published. Required fields are marked</p> */}
 
-                                    <form action="#" className="review-form">
+                                    <form onSubmit={handleSubmit} className="review-form">
                                         {/* <div className="mb-15 form-check">
                                             <input className="p-0 form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                                             <label className="form-check-label" htmlFor="flexRadioDefault1">
@@ -328,24 +357,66 @@ const ProductDetails = () => {
                                             <div className="col-md-6">
                                                 <div className="single-input">
                                                     <label htmlFor="name">Your Name</label>
-                                                    <input type="text" id="name" name="name" placeholder="John Doe" />
+                                                    <input
+                                                        type="text"
+                                                        id="name"
+                                                        name="name"
+                                                        placeholder="Enter Name"
+                                                        value={formData.name}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="single-input">
                                                     <label htmlFor="email">Your Email</label>
-                                                    <input type="email" id="email" name="email" placeholder="yourmail@gmail.com" />
+                                                    <input
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Enter Email"
+                                                        value={formData.email}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="single-input">
+                                                    <label htmlFor="phone">Your Phone</label>
+                                                    <input
+                                                        type="text"
+                                                        pattern='\d*'
+                                                        maxLength={16}
+                                                        id="phone"
+                                                        name="phone"
+                                                        placeholder="Your Phone"
+                                                        onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
+                                                        value={formData.phone}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="single-input">
                                                     <label htmlFor="message">Your Message</label>
-                                                    <textarea name="message" id="message" rows={5} placeholder="Type Message" defaultValue={""} />
+                                                    <textarea
+                                                        type="text"
+                                                        name="message"
+                                                        id="message"
+                                                        placeholder="Type Message"
+                                                        rows={5}
+                                                        value={formData.message}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="single-input">
-                                                    <button className="main-btn btn-hover">Submit Review</button>
+                                                    <button type='submit' className="main-btn btn-hover">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
